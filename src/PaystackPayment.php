@@ -3,16 +3,23 @@
 
 namespace Ujackson\AvoredPaystack;
 use App\User;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Models\Order;
-use Illuminate\Support\Facades\Auth;
 use Ujackson\AvoredPaystack\Helpers\TransRef;
 use Ujackson\AvoredPaystack\Models\PaystackTransaction;
 use Yabacon\Paystack\MetadataBuilder;
 
+/**
+ * Class PaystackPayment
+ * @package Ujackson\AvoredPaystack
+ */
 class PaystackPayment
 {
 
-    const CONFIG_KEY = 'payment_paystack_enabled';
+    /**
+     *
+     */
+    public const CONFIG_KEY = 'paystack_card_status';
 
     /**
      * Identifier for this Payment Option.
@@ -36,6 +43,24 @@ class PaystackPayment
     protected $view = 'paystack-card::index';
 
     /**
+     * @var mixed
+     */
+    protected $configRepo;
+
+
+    protected $enable;
+
+    /**
+     * PaystackPayment constructor.
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function __construct()
+    {
+        $this->configRepo = app()->make(ConfigurationModelInterface::class);
+        $this->enable = $this->configRepo->getValueByCode(self::CONFIG_KEY);
+    }
+
+    /**
      * Get Identifier for this Payment Option.
      *
      * return string
@@ -45,10 +70,13 @@ class PaystackPayment
         return $this->identifier;
     }
 
+
     public function enable()
     {
-        return true;
+        return $this->enable;
     }
+
+
 
     /**
      * Attempt to initialize paystack payment.
