@@ -1,0 +1,5 @@
+name: Ujackson Avored Paystack Payment Gateway
+identifier: ujackson-avored-paystack
+status: active
+description: Avored Paystack Module
+namespace: Ujackson\AvoredPaystack\

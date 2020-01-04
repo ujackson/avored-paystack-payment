@@ -1,0 +1,31 @@
+{
+    "name" : "ujackson/avored-paystack",
+    "description" : "AvoRed Laravel E commerce - Paystack Payment Module",
+    "keywords" : [
+        "framework",
+        "avored",
+        "paystack",
+        "payments"
+    ],
+    "license" : "MIT",
+    "authors" : [{
+        "name" : "Uyime Jackson",
+        "email" : "ujackson@gmail.com"
+    }
+    ],
+    "type" : "avored-module",
+    "require" : {
+        "php": "^7.2",
+        "avored/module-installer" : "1.*",
+        "avored/framework" : "~3.0",
+        "yabacon/paystack-php": "^2.1"
+    },
+    "autoload" : {
+        "classmap" : [
+            "database/migrations"
+        ],
+        "psr-4" : {
+            "Ujackson\\AvoRedPaystack\\" : "src/"
+        }
+    }
+}
